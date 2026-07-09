@@ -28,5 +28,9 @@ public class ProductInPurchase {
     @JoinColumn(name = "product")
     private Product product;
 
+    @Version
+    private long version;
+
+
 
 }

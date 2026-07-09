@@ -39,6 +39,8 @@ public class Product {
     @JsonIgnore
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 
+    @Version
+    private long version;
 
 
 }

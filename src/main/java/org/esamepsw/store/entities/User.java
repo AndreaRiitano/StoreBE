@@ -40,4 +40,8 @@ public class User {
     @JsonIgnore
     private List<Purchase> purchases= new ArrayList<Purchase>();
 
+    @Version
+    private long version;
+
+
 }

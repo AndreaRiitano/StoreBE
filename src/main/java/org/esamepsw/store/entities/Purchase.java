@@ -34,4 +34,8 @@ public class Purchase {
     @OneToMany(mappedBy = "purchase",  cascade = CascadeType.MERGE)
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 
+    @Version
+    private long version;
+
+
 }

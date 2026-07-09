@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
-    List<Purchase> findByBuyer(User user);
+    List<Purchase> findByBuyer(User buyer);
     List<Purchase> findByPurchaseTime(Date date);
     List<Purchase> findByBuyerBetween(Date startDate, Date endDate, User user);
 

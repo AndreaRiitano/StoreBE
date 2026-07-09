@@ -1,4 +1,4 @@
-package org.esamepsw.store.utilities.exceptions.productexceptions;
+package org.esamepsw.store.utilities.exceptions.product;
 
 public class ProductNotFoundException extends Exception{
     public ProductNotFoundException(){}

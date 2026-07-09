@@ -4,7 +4,7 @@ package org.esamepsw.store.services;
 
 import org.esamepsw.store.entities.Product;
 import org.esamepsw.store.repositories.ProductRepository;
-import org.esamepsw.store.utilities.exceptions.productexceptions.ProductNotFoundException;
+import org.esamepsw.store.utilities.exceptions.product.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +27,15 @@ public class ProductService {
         if(productRepository.findById(id).isPresent()) {
             return productRepository.findById(id).get();
         }else  {
+            throw new ProductNotFoundException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> findByName(String name) throws ProductNotFoundException {
+        if(productRepository.existsProductsByName(name)) {
+            return productRepository.findProductsByName(name);
+        }else   {
             throw new ProductNotFoundException();
         }
     }

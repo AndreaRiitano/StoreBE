@@ -2,11 +2,10 @@ package org.esamepsw.store.services;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.esamepsw.store.utilities.exceptions.userexceptions.UserAlreadyExistsException;
+import org.esamepsw.store.utilities.exceptions.user.UserAlreadyExistsException;
 import org.esamepsw.store.entities.User;
 import org.esamepsw.store.repositories.UserRepository;
-import org.esamepsw.store.utilities.exceptions.userexceptions.UserAlreadyExistsException;
-import org.esamepsw.store.utilities.exceptions.userexceptions.UserNotFoundException;
+import org.esamepsw.store.utilities.exceptions.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,7 @@ public class UserService {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     @Transactional(readOnly = false)
     public User addUser(User user) throws UserAlreadyExistsException {
         if (userRepository.existsByEmail(user.getEmail())) {
