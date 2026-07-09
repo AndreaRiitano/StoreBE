@@ -24,7 +24,7 @@ public class ProductInPurchase {
     @Column(name = "quantity", nullable = true)
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product")
     private Product product;
 

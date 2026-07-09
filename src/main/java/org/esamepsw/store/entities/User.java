@@ -36,7 +36,7 @@ public class User {
     @Column(name = "address", length = 100)
     private String address;
 
-    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Purchase.class , mappedBy = "user_id")
     @JsonIgnore
     private List<Purchase> purchases= new ArrayList<Purchase>();
 

@@ -35,7 +35,7 @@ public class Product {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "product", cascade = CascadeType.MERGE)
     @JsonIgnore
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 

@@ -28,10 +28,10 @@ public class Purchase {
     private Date purchaseTime;
 
     @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "purchase",  cascade = CascadeType.MERGE)
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 
 }
