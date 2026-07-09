@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -36,6 +37,6 @@ public class User {
 
     @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Purchase> purchases;
+    private List<Purchase> purchases= new ArrayList<Purchase>();
 
 }

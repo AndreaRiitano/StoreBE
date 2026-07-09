@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,8 +27,11 @@ public class Purchase {
     @Column(name = "purchase_time", nullable = false)
     private Date purchaseTime;
 
-    @JoinColumn
     @ManyToOne
+    @JoinColumn(name = "user")
     private User user;
+
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 
 }

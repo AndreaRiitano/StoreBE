@@ -1,8 +1,13 @@
 package org.esamepsw.store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +31,11 @@ public class Product {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
+    @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
+
 
 
 }
