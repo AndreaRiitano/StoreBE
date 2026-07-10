@@ -31,7 +31,7 @@ public class Purchase {
     @JoinColumn(name = "user_id")
     private User user_id;
 
-    @OneToMany(mappedBy = "purchase",  cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "purchase",  cascade = CascadeType.ALL)
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();
 
     @Version

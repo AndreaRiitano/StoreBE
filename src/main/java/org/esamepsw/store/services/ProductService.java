@@ -112,4 +112,15 @@ public class ProductService {
         return originalProduct;
     }
 
+    @Transactional(readOnly = false)
+    public void removeProduct(Product toRemove) throws ProductNotFoundException {
+
+        if(productRepository.existsProductById(toRemove.getId()) ) {
+            productRepository.deleteById(toRemove.getId());
+        }else  {
+            throw new ProductNotFoundException();
+        }
+
+    }
+
 }
