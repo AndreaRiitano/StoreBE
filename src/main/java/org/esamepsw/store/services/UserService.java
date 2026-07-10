@@ -43,4 +43,13 @@ public class UserService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public User getUserByEmail(String email) throws UserNotFoundException {
+        if(userRepository.existsByEmail(email)) {
+            return userRepository.findByEmail(email).getFirst();
+        }else{
+            throw new UserNotFoundException();
+        }
+    }
+
 }

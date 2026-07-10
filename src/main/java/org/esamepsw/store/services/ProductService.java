@@ -8,6 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import org.esamepsw.store.entities.Product;
 import org.esamepsw.store.repositories.ProductRepository;
 import org.esamepsw.store.utilities.exceptions.product.ProductAlreadyExistsException;
+import org.esamepsw.store.utilities.exceptions.product.ProductCategoryNotFound;
 import org.esamepsw.store.utilities.exceptions.product.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,25 @@ public class ProductService {
             return productRepository.findById(id).get();
         }else  {
             throw new ProductNotFoundException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Product findByCode(String code) {
+        if(productRepository.existsProductByCode(code)) {
+            return productRepository.findByCode(code);
+
+        }else   {
+            throw new ProductNotFoundException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> findByCategory(String category) {
+        if(productRepository.existsCategory(category)) {
+            return productRepository.findProductsByCategory(category);
+        }else   {
+            throw new ProductCategoryNotFound();
         }
     }
 
@@ -88,7 +108,7 @@ public class ProductService {
             product.setQuantity(product.getQuantity());
         }
 
-        
+
         return originalProduct;
     }
 

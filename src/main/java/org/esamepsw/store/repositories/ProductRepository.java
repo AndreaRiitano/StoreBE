@@ -12,7 +12,9 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
 
     List<Product> findProductsByName(String name);
     List<Product> findProductsByCategory(String category);
-
+    Product findByCode(String code);
+    boolean existsCategory(String category);
+    boolean existsCode(String code);
     boolean existsProductByCode(String code);
     boolean existsProductById(long id);
     boolean existsProductsByName(String name);
