@@ -51,7 +51,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<Product> findByCategory(String category) {
-        if(productRepository.existsCategory(category)) {
+        if(productRepository.existsByCategory(category)) {
             return productRepository.findProductsByCategory(category);
         }else   {
             throw new ProductCategoryNotFound();

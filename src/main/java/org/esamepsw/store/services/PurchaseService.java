@@ -39,7 +39,7 @@ public class PurchaseService {
         if ( !userRepository.existsById(user.getId()) ) {
             throw new UserNotFoundException();
         }
-        return purchaseRepository.findByBuyer(user);
+        return purchaseRepository.findByUser(user);
     }
 
     @Transactional(readOnly = false)
@@ -47,13 +47,13 @@ public class PurchaseService {
 
         //da mettere altro per controllo utente
 
-        User user = entityManager.find(User.class, incomingPurchase.getUser_id().getId());
+        User user = entityManager.find(User.class, incomingPurchase.getUser().getId());
         if (user == null) {
             throw new UserNotFoundException();
         }
 
         Purchase newPurchase = new Purchase();
-        newPurchase.setUser_id(user);
+        newPurchase.setUser(user);
 
         if (incomingPurchase.getProductInPurchase() != null) {
             for (ProductInPurchase incomingPip : incomingPurchase.getProductInPurchase()) {

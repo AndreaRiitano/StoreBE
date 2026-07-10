@@ -36,7 +36,7 @@ public class User {
     @Column(name = "address", length = 100)
     private String address;
 
-    @OneToMany(targetEntity = Purchase.class , mappedBy = "user_id")
+    @OneToMany(targetEntity = Purchase.class , mappedBy = "user")
     @JsonIgnore
     private List<Purchase> purchases= new ArrayList<Purchase>();
 

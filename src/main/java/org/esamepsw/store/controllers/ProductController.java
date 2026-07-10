@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity addProduct(@RequestBody Product product) {
 
         try{
@@ -30,7 +30,7 @@ public class ProductController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/update")
     public ResponseEntity updateProduct(@RequestBody Product product) {
         try{
             productService.updateProduct(product);
@@ -39,13 +39,13 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> allProducts = productService.findAll();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/category")
     public ResponseEntity<List<Product>> getAllProductsByCategory(String category) {
 
         try{

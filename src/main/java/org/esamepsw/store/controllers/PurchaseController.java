@@ -19,7 +19,7 @@ public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity addPurchase(@RequestBody Purchase incomingPurchase) {
         try {
             Purchase added = purchaseService.addPurchase(incomingPurchase);
