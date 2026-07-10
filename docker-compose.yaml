@@ -1,0 +1,41 @@
+services:
+
+  mysql-db:
+    image: mysql:8.0.28
+    container_name: store-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: store_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: store-phpmyadmin
+    environment:
+      PMA_HOST: mysql-db
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql-db
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: store-keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "9090:8080"
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
