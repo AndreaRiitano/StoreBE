@@ -38,6 +38,9 @@ public class Product {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "product", cascade = CascadeType.MERGE)
     @JsonIgnore
     private List<ProductInPurchase> productInPurchase = new ArrayList<ProductInPurchase>();

@@ -107,6 +107,9 @@ public class ProductService {
         if(product.getQuantity()>=0){
             product.setQuantity(product.getQuantity());
         }
+        if(product.getImgUrl()!=null) {
+            product.setImgUrl(product.getImgUrl());
+        }
 
 
         return originalProduct;
