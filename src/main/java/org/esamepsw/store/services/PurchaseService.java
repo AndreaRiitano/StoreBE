@@ -13,7 +13,7 @@ import org.esamepsw.store.repositories.PurchaseRepository;
 import org.esamepsw.store.repositories.UserRepository;
 import org.esamepsw.store.utilities.exceptions.product.ProductNotFoundException;
 import org.esamepsw.store.utilities.exceptions.purchase.QuantityUnavailableException;
-import org.esamepsw.store.utilities.exceptions.user.UserAlreadyExistsException;
+import org.esamepsw.store.utilities.dto.PipAddRequest;
 import org.esamepsw.store.utilities.exceptions.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,11 +106,20 @@ public class PurchaseService {
     }
 
     @Transactional(readOnly = false)
-    public ProductInPurchase addProductInPurchase(ProductInPurchase incomingPurchase) {
-
-        if(!productRepository.findById(incomingPurchase.getProduct().getId()).isPresent()) {
+    public ProductInPurchase addProductInPurchase(PipAddRequest incomingPurchase) {
+        System.out.println(incomingPurchase.getKeycloakId()+"ciao");
+        User user = userRepository.findByKeycloakId(incomingPurchase.getKeycloakId());
+        ProductInPurchase toAdd = new ProductInPurchase();
+        toAdd.setUser(user);
+        toAdd.setProduct(incomingPurchase.getProduct());
+        toAdd.setQuantity(incomingPurchase.getQuantity());
+        if(!userRepository.existsByKeycloakId(incomingPurchase.getKeycloakId())) {
+            throw new UserNotFoundException();
+        }
+        if(!productRepository.existsProductById(toAdd.getProduct().getId())) {
             throw new ProductNotFoundException();
         }
-       return productInPurchaseRepository.save(incomingPurchase);
+
+       return productInPurchaseRepository.save(toAdd);
     }
 }

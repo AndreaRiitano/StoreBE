@@ -1,10 +1,14 @@
 package org.esamepsw.store.controllers;
 
 
+import org.esamepsw.store.entities.Product;
 import org.esamepsw.store.entities.ProductInPurchase;
 import org.esamepsw.store.entities.Purchase;
 import org.esamepsw.store.entities.User;
 import org.esamepsw.store.services.PurchaseService;
+import org.esamepsw.store.utilities.dto.PipAddRequest;
+import org.esamepsw.store.utilities.exceptions.product.ProductCategoryNotFound;
+import org.esamepsw.store.utilities.exceptions.product.ProductNotFoundException;
 import org.esamepsw.store.utilities.exceptions.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +25,7 @@ public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
 
-    @PostMapping("/add")
+    @PostMapping("/addPurchase")
     public ResponseEntity addPurchase(@RequestBody Purchase incomingPurchase) {
         try {
             Purchase added = purchaseService.addPurchase(incomingPurchase);
@@ -29,6 +33,17 @@ public class PurchaseController {
         }catch (RuntimeException e){
             return new ResponseEntity<>("Quantity unavailable or user not found", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/addToCart")
+    public ResponseEntity addToCart(@RequestBody PipAddRequest incomingProduct) {
+        try {
+            ProductInPurchase added = purchaseService.addProductInPurchase(incomingProduct);
+            return new ResponseEntity<>(added, HttpStatus.CREATED);
+        }catch(ProductNotFoundException e){
+            return new ResponseEntity<>("Product not found", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping("/{user}")

@@ -29,7 +29,7 @@ public class ProductInPurchase {
     private Product product;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_pip")
+    @JoinColumn(name = "user")
     private User user;
 
     @Version

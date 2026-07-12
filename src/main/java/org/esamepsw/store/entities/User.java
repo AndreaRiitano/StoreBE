@@ -43,7 +43,7 @@ public class User {
     @JsonIgnore
     private List<Purchase> purchases= new ArrayList<Purchase>();
 
-    @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "use")
+    @OneToMany(targetEntity = ProductInPurchase.class, mappedBy = "user")
     @JsonIgnore
     private List<ProductInPurchase> pip = new ArrayList<>();
 
