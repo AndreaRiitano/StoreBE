@@ -67,6 +67,10 @@ public class ProductService {
             throw new ProductNotFoundException();
         }
     }
+    @Transactional(readOnly = true)
+    public List<Product> findByNameContainingIgnoreCase(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name);
+    }
 
     @Transactional(readOnly = false)
     public Product addProduct(Product product) throws ProductAlreadyExistsException {

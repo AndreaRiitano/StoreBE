@@ -49,6 +49,12 @@ public class ProductController {
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam("name") String name) {
+        List<Product> products = productService.findByNameContainingIgnoreCase(name);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @GetMapping("/category")
     public ResponseEntity<List<Product>> getAllProductsByCategory(String category) {
 
